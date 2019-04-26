@@ -1,5 +1,5 @@
 {% set name = "applicationinsights" %}
-{% set version = "0.11.7" %}
+{% set version = "0.11.9" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
-  sha256: c4712ede8eeca57e611b7fd4b3b6c345745a4a002a08145ab45f92d31d900040
+  sha256: 30a11aafacea34f8b160fbdc35254c9029c7e325267874e3c68f6bdbcd6ed2c3
 
 build:
   noarch: python
