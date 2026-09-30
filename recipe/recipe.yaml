@@ -1,0 +1,68 @@
+schema_version: 1
+
+context:
+  version: "0.11.10"
+
+package:
+  name: applicationinsights
+  version: ${{ version }}
+
+source:
+  url:
+    - https://files.pythonhosted.org/packages/d3/f2/46a75ac6096d60da0e71a068015b610206e697de01fa2fb5bba8564b0798/applicationinsights-${{ version }}.tar.gz
+    - https://pypi.org/packages/source/a/applicationinsights/applicationinsights-${{ version }}.tar.gz
+  sha256: 0b761f3ef0680acf4731906dfc1807faa6f2a57168ae74592db0084a6099f7b3
+
+build:
+  number: 0
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports:
+        - applicationinsights
+        - applicationinsights.channel
+        - applicationinsights.channel.contracts
+        - applicationinsights.exceptions
+        - applicationinsights.flask
+        - applicationinsights.logging
+        - applicationinsights.requests
+      pip_check: true
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+  - script:
+      - python -c "import applicationinsights.django"
+    requirements:
+      run:
+        - python ${{ python_min }}.*
+        - django
+
+about:
+  homepage: https://github.com/Microsoft/ApplicationInsights-Python
+  repository: https://github.com/Microsoft/ApplicationInsights-Python
+  documentation: https://microsoft.github.io/ApplicationInsights-Python/
+  license: MIT
+  license_file: LICENSE.txt
+  summary: This project extends the Application Insights API surface to support Python
+  description: |
+    Application Insights is a service that allows developers to keep their
+    application available, performing and succeeding. This Python module
+    sends telemetry of various kinds, such as events, traces and exceptions,
+    to the Application Insights service, where it can be visualized in the
+    Azure Portal. Integrations for Django, Flask, the logging module and
+    WSGI are included.
+
+extra:
+  recipe-maintainers:
+    - andreyz4k
+    - killua156
